@@ -1,0 +1,9 @@
+doctype html
+html(ng-app="4xxi-todo")
+    head
+        link(rel='stylesheet', type='text/css', href='vendors/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet', type='text/css', href='vendors/bootstrap/dist/css/bootstrap-theme.css')
+    body
+        div(ui-view)
+        include tpl.jade
+        include script.jade

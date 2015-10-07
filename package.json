@@ -1,0 +1,30 @@
+{
+  "name": "4xxi-todo",
+  "version": "0.0.0",
+  "description": "4XXI todo",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "bower": "^1.5.3",
+    "eslint": "^1.6.0",
+    "requirejs": "^2.1.20"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tako Neko <oct8cat@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oct8cat/4xxi-todo"
+  },
+  "bugs": {
+    "url": "https://github.com/oct8cat/4xxi-todo/issues"
+  },
+  "homepage": "https://github.com/oct8cat/4xxi-todo"
+}

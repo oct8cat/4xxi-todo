@@ -1,0 +1,95 @@
+script(type='text/html', id='tpl-_')
+    div(ui-view)
+
+script(type='text/html', id='tpl-empty')
+    div(ui-view)
+
+script(type='text/html', id='tpl-sign')
+    div.container
+        div.row
+            div.col-md-4.col-md-offset-4
+                h2.text-center
+                    span(ng-if='is.signIn') Sign In
+                    span(ng-if='is.signUp') Sign Up
+                form(
+                        method='post',
+                        name='signForm',
+                        ng-submit='onSubmitSignForm($event)')
+                    div.form-group
+                        input.form-control(
+                            type='text',
+                            name='username',
+                            placeholder='Username',
+                            ng-model='credentials.username')
+                    div.form-group
+                        input.form-control(
+                            type='password',
+                            name='password',
+                            placeholder='Password',
+                            ng-model='credentials.password')
+                    p.text-danger(ng-if='error') {{ error.error || error.message }}
+                    button.btn.btn-default.btn-block(type='submit')
+                        span(ng-if='is.signIn') Sign In
+                        span(ng-if='is.signUp') Sign Up
+        div.row
+            div.col-md-12.text-center(style='padding: 16px 0;')
+                a(ng-if='is.signIn', ui-sref='_.sign.up') Register
+                a(ng-if='is.signUp', ui-sref='_.sign.in') Log in
+
+script(type='text/html', id='tpl-todo')
+    nav.navbar.navbar-inverse.navbar-fixed-top
+        div.container-fluid
+            div.navbar-header
+                a.navbar-brand(ui-sref='_.todo.list._') 4xxi-todo
+            ul.nav.navbar-nav.navbar-right
+                li.dropdown
+                    a.dropdown-toggle(
+                        data-toggle='dropdown',
+                        role='button',
+                        href='javascript:void(0)')
+                        span {{ me.username }}
+                        span.caret
+                    ul.dropdown-menu
+                        li: a(ui-sref='_.sign.out') Sign out
+    div.container(ui-view, style='padding-top: 64px')
+
+
+script(type='text/html', id='tpl-todo.list')
+    div.row(ui-view='form')
+    div.row(ui-view='list')
+
+script(type='text/html', id='tpl-todo.list.form')
+    form(method='post', ng-submit='onSubmitTodoForm($event)')
+        div.col-md-10
+            div.form-group
+                input.form-control(
+                    type='text',
+                    name='title',
+                    ng-model='todo.title',
+                    placeholder='New Todo')
+        div.col-md-2
+            button.btn.btn-default.btn-block(type='submit') Save
+
+script(type='text/html', id='tpl-todo.list.list')
+    div.col-md-12
+        ul.list-group
+            li.list-group-item(
+                    ng-repeat='todo in todos | orderBy : todo.get("createdAt") : true',
+                    ng-class='{"list-group-item-success": todo.get("completed")}')
+                s(ng-if='todo.get("completed")') {{ todo.get('title') }}
+                span(ng-if='!todo.get("completed")') {{ todo.get('title') }}
+                div.btn-group.pull-right
+                    button.btn.btn-success.btn-xs(
+                        type='button',
+                        title='Complete',
+                        ng-click='$parent.complete(todo)',
+                        ng-if='!todo.get("completed")'): i.glyphicon.glyphicon-ok
+                    button.btn.btn-warning.btn-xs(
+                        type='button',
+                        title='Restore',
+                        ng-click='$parent.restore(todo)',
+                        ng-if='todo.get("completed")'): i.glyphicon.glyphicon-repeat
+                    button.btn.btn-danger.btn-xs(
+                        type='button',
+                        title='Remove',
+                        ng-click='$parent.remove(todo)'): i.glyphicon.glyphicon-remove
