@@ -36,13 +36,14 @@ $(bower_components): bower.json
 	$(bower) i
 	touch $@
 
+$(build)/lib/webapp/public/js/%.js: $(src)/lib/webapp/public/js/%.es6
+	@mkdir -p $(@D)
+	$(babel) --modules amd $< -o $@
+
 $(build)/%.js: $(src)/%.es6
 	@mkdir -p $(@D)
 	$(babel) $< -o $@
 
-$(build)/lib/webapp/public/js/%.js: $(src)/lib/webapp/public/js/%.es6
-	@mkdir -p $(@D)
-	$(babel) --modules amd $< -o $@
 
 $(build)/%.js: $(src)/%.js
 	@mkdir -p $(@D)
