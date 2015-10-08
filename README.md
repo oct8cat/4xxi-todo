@@ -18,3 +18,5 @@ make
 ```
 node build/bin/httpd.js
 ```
+
+http://localhost:3000
