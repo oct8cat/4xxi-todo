@@ -19,4 +19,4 @@ make
 node build/bin/httpd.js
 ```
 
-http://localhost:3000
+[http://localhost:3000](http://localhost:3000)
